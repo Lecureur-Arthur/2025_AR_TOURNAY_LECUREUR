@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+using System.Collections;
 
 public class ThrowDice : MonoBehaviour
 {
@@ -7,22 +8,41 @@ public class ThrowDice : MonoBehaviour
     public Camera arCamera;
     public float throwForce = 5f;
 
+    private bool isTouching = false;
+    private GameObject currentDice;
+
     void Update()
     {
-        // Debug.Log("Update method called");
         if (Touchscreen.current != null && Touchscreen.current.primaryTouch.press.wasPressedThisFrame)
         {
-            Debug.Log("Touch detected (new Input System)");
-            Throw();
+            if (!isTouching)
+            {
+                isTouching = true;
+                Throw();
+            }
         }
     }
 
     void Throw()
     {
         Vector3 spawnPos = arCamera.transform.position + arCamera.transform.forward * 0.5f;
-        GameObject dice = Instantiate(dicePrefab, spawnPos, Random.rotation);
-        Rigidbody rb = dice.GetComponent<Rigidbody>();
+        currentDice = Instantiate(dicePrefab, spawnPos, Random.rotation);
+        Rigidbody rb = currentDice.GetComponent<Rigidbody>();
         rb.AddForce(arCamera.transform.forward * throwForce, ForceMode.Impulse);
         rb.AddTorque(Random.insideUnitSphere * 10f, ForceMode.Impulse);
+
+        StartCoroutine(ResetAfterDelay(5f));
+    }
+
+    IEnumerator ResetAfterDelay(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+
+        if (currentDice != null)
+        {
+            Destroy(currentDice);
+        }
+
+        isTouching = false;
     }
 }
