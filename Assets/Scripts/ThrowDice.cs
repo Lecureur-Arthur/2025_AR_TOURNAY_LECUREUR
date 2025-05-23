@@ -8,6 +8,8 @@ public class ThrowDice : MonoBehaviour
     public Camera arCamera;
     public float throwForce = 5f;
 
+    public int timeDesableDice;
+
     private bool isTouching = false;
     private GameObject currentDice;
 
@@ -31,7 +33,7 @@ public class ThrowDice : MonoBehaviour
         rb.AddForce(arCamera.transform.forward * throwForce, ForceMode.Impulse);
         rb.AddTorque(Random.insideUnitSphere * 10f, ForceMode.Impulse);
 
-        StartCoroutine(ResetAfterDelay(5f));
+        StartCoroutine(ResetAfterDelay(timeDesableDice));
     }
 
     IEnumerator ResetAfterDelay(float delay)

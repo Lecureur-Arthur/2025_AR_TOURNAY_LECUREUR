@@ -508,6 +508,7 @@ MonoBehaviour:
   dicePrefab: {fileID: 7480525804154556286, guid: 13f669def4acc5f48ace53c6d8035e6d, type: 3}
   arCamera: {fileID: 240996956}
   throwForce: 5
+  timeDesableDice: 4
 --- !u!4 &1253926489
 Transform:
   m_ObjectHideFlags: 0
