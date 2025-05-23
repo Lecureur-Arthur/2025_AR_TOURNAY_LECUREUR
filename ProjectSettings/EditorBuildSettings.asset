@@ -6,8 +6,13 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+<<<<<<< HEAD
     path: Assets/Scenes/New Scene.unity
     guid: 1155a6f9ac1397549be1d9d61c2b33cb
+=======
+    path: Assets/Scenes/SimulationDice.unity
+    guid: ecf9985ce513f914e987b39fa7a00fe0
+>>>>>>> 7e75c8e4d4414b5fb6f06608b96338f3831b8839
   m_configObjects:
     UnityEditor.XR.ARCore.ARCoreSettings: {fileID: 11400000, guid: ee7b37011cbf93d4c9d2c60a45ce5f4f, type: 2}
     com.unity.xr.arfoundation.simulation_settings: {fileID: 11400000, guid: 9ce097efe9333324b818d8e98ecb224d, type: 2}
