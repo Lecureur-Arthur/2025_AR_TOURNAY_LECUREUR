@@ -1,34 +1,39 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Dice : MonoBehaviour
 {
     [SerializeField] private Rigidbody rb;
+    [SerializeField] private Text diceValueText; // Référence vers ton UI Text (ou TextMeshProUGUI)
     private bool hasStopped = false;
 
     private Vector3[] faceNormals = new Vector3[]
     {
-        Vector3.up,       // face 1
-        Vector3.down,     // face 2
+        Vector3.forward,       // face 1
+        Vector3.up,     // face 2
         Vector3.left,     // face 3
         Vector3.right,    // face 4
-        Vector3.forward,  // face 5
+        Vector3.down,  // face 5
         Vector3.back      // face 6
     };
 
     private void Update()
     {
-        //Debug.Log("Update method called");
         if (!hasStopped && rb.IsSleeping())
         {
             hasStopped = true;
             int topFace = GetTopFace();
-            Debug.Log("Face superieure : " + topFace);
+            Debug.Log("Face supérieure : " + topFace);
+
+            if (diceValueText != null)
+            {
+                diceValueText.text = "Résultat : " + topFace;
+            }
         }
     }
 
     private int GetTopFace()
     {
-        Debug.Log("GetTopFace method called");
         Vector3 worldUp = Vector3.up;
         float maxDot = -Mathf.Infinity;
         int topFace = -1;
@@ -46,5 +51,10 @@ public class Dice : MonoBehaviour
         }
 
         return topFace;
+    }
+
+    public void SetDiceText(Text uiText)
+    {
+        diceValueText = uiText;
     }
 }
