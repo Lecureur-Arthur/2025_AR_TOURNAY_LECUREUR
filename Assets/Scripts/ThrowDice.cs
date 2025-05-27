@@ -1,15 +1,17 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 using System.Collections;
+using TMPro;
 
 public class ThrowDice : MonoBehaviour
 {
     public GameObject dicePrefab;
     public Camera arCamera;
     public float throwForce = 5f;
-
-    public int timeDesableDice;
-
+    public TMP_Text resultDiceText;
+    public ImageRecognition imageRecognition;
+    public float timeDesableDice = 5;
+    
     private bool isTouching = false;
     private GameObject currentDice;
 
@@ -29,11 +31,49 @@ public class ThrowDice : MonoBehaviour
     {
         Vector3 spawnPos = arCamera.transform.position + arCamera.transform.forward * 0.5f;
         currentDice = Instantiate(dicePrefab, spawnPos, Random.rotation);
+
+        if (currentDice != null)
+        {
+            Dice diceScript = currentDice.GetComponent<Dice>();
+            if (diceScript != null)
+            {
+                diceScript.SetThrowDiceScript(this);
+            }
+        }
+
         Rigidbody rb = currentDice.GetComponent<Rigidbody>();
         rb.AddForce(arCamera.transform.forward * throwForce, ForceMode.Impulse);
         rb.AddTorque(Random.insideUnitSphere * 10f, ForceMode.Impulse);
 
         StartCoroutine(ResetAfterDelay(timeDesableDice));
+    }
+
+    public void ReceiveDiceResult(int result)
+    {
+        if (resultDiceText != null)
+        {
+            resultDiceText.text = result.ToString();
+
+            // Transmet la valeur au script ImageRecognition
+            if (imageRecognition != null)
+            {
+                imageRecognition.nbMob = result; // Assurez-vous que nbMob est un int dans ImageRecognition
+                Debug.Log("nbMob correctement assigné à ImageRecognition : " + result);
+            }
+            else
+            {
+                Debug.LogWarning("ImageRecognition n'est pas assigné dans l'inspecteur.");
+            }
+        }
+        else
+        {
+            Debug.LogWarning("resultDiceText n'est pas assigné dans l'inspecteur.");
+        }
+
+        if (currentDice != null)
+        {
+            Destroy(currentDice);
+        }
     }
 
     IEnumerator ResetAfterDelay(float delay)
@@ -45,6 +85,6 @@ public class ThrowDice : MonoBehaviour
             Destroy(currentDice);
         }
 
-        isTouching = false;
+        // isTouching = false;
     }
 }

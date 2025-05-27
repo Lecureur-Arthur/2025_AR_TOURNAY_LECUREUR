@@ -1,20 +1,18 @@
 using UnityEngine;
-using UnityEngine.UI;
 
 public class Dice : MonoBehaviour
 {
     [SerializeField] private Rigidbody rb;
-    [SerializeField] private Text diceValueText; // Référence vers ton UI Text (ou TextMeshProUGUI)
     private bool hasStopped = false;
-
+    private ThrowDice throwDiceScript;
     private Vector3[] faceNormals = new Vector3[]
     {
-        Vector3.forward,       // face 1
-        Vector3.up,     // face 2
-        Vector3.left,     // face 3
-        Vector3.right,    // face 4
-        Vector3.down,  // face 5
-        Vector3.back      // face 6
+        Vector3.forward,    // face 1
+        Vector3.up,         // face 2
+        Vector3.left,       // face 3
+        Vector3.right,      // face 4
+        Vector3.down,       // face 5
+        Vector3.back        // face 6
     };
 
     private void Update()
@@ -25,9 +23,14 @@ public class Dice : MonoBehaviour
             int topFace = GetTopFace();
             Debug.Log("Face supérieure : " + topFace);
 
-            if (diceValueText != null)
+            // Envoie le résultat au script ThrowDice
+            if (throwDiceScript != null)
             {
-                diceValueText.text = "Résultat : " + topFace;
+                throwDiceScript.ReceiveDiceResult(topFace);
+            }
+            else
+            {
+                Debug.LogWarning("Le script ThrowDice n'est pas assigné.");
             }
         }
     }
@@ -49,12 +52,11 @@ public class Dice : MonoBehaviour
                 topFace = i + 1;
             }
         }
-
         return topFace;
     }
 
-    public void SetDiceText(Text uiText)
+    public void SetThrowDiceScript(ThrowDice script)
     {
-        diceValueText = uiText;
+        throwDiceScript = script;
     }
 }

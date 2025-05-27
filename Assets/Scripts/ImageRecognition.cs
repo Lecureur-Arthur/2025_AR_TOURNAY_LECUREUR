@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.XR.ARFoundation;
 using UnityEngine.XR.ARSubsystems;
@@ -9,6 +7,7 @@ public class ImageRecognition : MonoBehaviour
     public GameObject gameObjectToInstantiate;
     public ARTrackedImageManager _aRTrackedImageManager;
     public int nbMob;
+    public GameObject throwDice;
     private bool hasSpawned = false;
 
     void OnEnable()
@@ -39,6 +38,7 @@ public class ImageRecognition : MonoBehaviour
             // Handle the updated image
             if (!hasSpawned && trackedImage.trackingState == TrackingState.Tracking)
             {
+                Debug.Log("nbMob reçu de ThrowDice : " + nbMob);
                 SpawnObjectsOnImage(trackedImage);
                 hasSpawned = true;
             }
@@ -73,5 +73,7 @@ public class ImageRecognition : MonoBehaviour
         }
 
         Debug.Log($"{nbMob} objets instanciés sur l’image '{trackedImage.referenceImage.name}'.");
+
+        // throwDice.SetActive(true); // Désactive le bouton de lancer le dé
     }
 }
