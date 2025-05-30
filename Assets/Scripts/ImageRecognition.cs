@@ -1,3 +1,4 @@
+using System.Runtime.CompilerServices;
 using UnityEngine;
 using UnityEngine.XR.ARFoundation;
 using UnityEngine.XR.ARSubsystems;
@@ -6,7 +7,7 @@ public class ImageRecognition : MonoBehaviour
 {
     public GameObject gameObjectToInstantiate;
     public ARTrackedImageManager _aRTrackedImageManager;
-    public int nbMob;
+    // public int nbMob;
     public GameObject throwDice;
     private bool hasSpawned = false;
 
@@ -38,7 +39,7 @@ public class ImageRecognition : MonoBehaviour
             // Handle the updated image
             if (!hasSpawned && trackedImage.trackingState == TrackingState.Tracking)
             {
-                Debug.Log("nbMob reçu de ThrowDice : " + nbMob);
+                // Debug.Log("nbMob reçu de ThrowDice : " + nbMob);
                 SpawnObjectsOnImage(trackedImage);
                 hasSpawned = true;
             }
@@ -57,10 +58,16 @@ public class ImageRecognition : MonoBehaviour
 
         // Calcul du placement centré sur l'image
         float spacing = 0.5f; // espacement en mètres
-        float totalWidth = (nbMob - 1) * spacing;
+        int mobsToSpawn = DiceDataManager.Instance.nbMob; // Nombre d'objets à instancier
+        if (mobsToSpawn <= 0)
+        {
+            Debug.LogWarning("Aucun objet à instancier, nbMob est inférieur ou égal à 0.");
+            return;
+        }
+        float totalWidth = (mobsToSpawn - 1) * spacing;
         Vector3 startLocalPos = -Vector3.right * (totalWidth / 2f); // alignement horizontal local
 
-        for (int i = 0; i < nbMob; i++)
+        for (int i = 0; i < mobsToSpawn; i++)
         {
             Vector3 localOffset = startLocalPos + Vector3.right * (i * spacing);
             Vector3 worldPosition = imageTransform.TransformPoint(localOffset); // convertit en monde
@@ -72,7 +79,7 @@ public class ImageRecognition : MonoBehaviour
             // obj.transform.SetParent(trackedImage.transform);
         }
 
-        Debug.Log($"{nbMob} objets instanciés sur l’image '{trackedImage.referenceImage.name}'.");
+        Debug.Log($"{mobsToSpawn} objets instanciés sur l’image '{trackedImage.referenceImage.name}'.");
 
         // throwDice.SetActive(true); // Désactive le bouton de lancer le dé
     }

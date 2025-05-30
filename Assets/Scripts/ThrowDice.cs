@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using System.Collections;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class ThrowDice : MonoBehaviour
 {
@@ -54,16 +55,19 @@ public class ThrowDice : MonoBehaviour
         {
             resultDiceText.text = result.ToString();
 
+            DiceDataManager.Instance.nbMob = result;
+
             // Transmet la valeur au script ImageRecognition
-            if (imageRecognition != null)
-            {
-                imageRecognition.nbMob = result; // Assurez-vous que nbMob est un int dans ImageRecognition
-                Debug.Log("nbMob correctement assigné à ImageRecognition : " + result);
-            }
-            else
-            {
-                Debug.LogWarning("ImageRecognition n'est pas assigné dans l'inspecteur.");
-            }
+            // if (imageRecognition != null)
+            // {
+            //     imageRecognition.nbMob = result; // Assurez-vous que nbMob est un int dans ImageRecognition
+
+            //     Debug.Log("nbMob correctement assigné à ImageRecognition : " + result);
+            // }
+            // else
+            // {
+            //     Debug.LogWarning("ImageRecognition n'est pas assigné dans l'inspecteur.");
+            // }
         }
         else
         {
@@ -74,6 +78,8 @@ public class ThrowDice : MonoBehaviour
         {
             Destroy(currentDice);
         }
+
+        SceneManager.LoadScene("ShootARobjects");
     }
 
     IEnumerator ResetAfterDelay(float delay)

@@ -6,6 +6,9 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/Scenes/SimulationDice.unity
+    guid: ecf9985ce513f914e987b39fa7a00fe0
+  - enabled: 1
     path: Assets/Scenes/ShootARobjects.unity
     guid: a098bd6d854089c4aafb891f14e85bba
   m_configObjects:
