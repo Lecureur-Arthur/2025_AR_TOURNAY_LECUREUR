@@ -91,6 +91,9 @@ public class ThrowDice : MonoBehaviour
             Destroy(currentDice);
         }
 
-        // isTouching = false;
+        if (resultDiceText != null)
+        {
+           isTouching = false;
+        }
     }
 }
