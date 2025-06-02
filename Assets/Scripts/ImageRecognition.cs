@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using UnityEngine;
 using UnityEngine.XR.ARFoundation;
@@ -10,6 +11,33 @@ public class ImageRecognition : MonoBehaviour
     // public int nbMob;
     public GameObject throwDice;
     private bool hasSpawned = false;
+
+    public List<GameObject> spawnedObjects = new List<GameObject>();
+    public GameObject victoryPanel;
+    public GameObject shoot;
+
+    void Start()
+    {
+        if (victoryPanel != null)
+        {
+            victoryPanel.SetActive(false);
+            shoot.SetActive(true);
+        }
+    }
+
+    void Update()
+    {
+        // Nettoyer les objets détruits de la liste
+        spawnedObjects.RemoveAll(obj => obj == null);
+
+        // Vérifier s'om n'en reste plus
+        if (spawnedObjects.Count ==0 && hasSpawned == true)
+        {
+            victoryPanel.SetActive(true);
+            shoot.SetActive(false);
+            Debug.Log("Tous les objets ont été détruits, prêt à ré-instancier.");
+        }
+    }
 
     void OnEnable()
     {
@@ -76,6 +104,7 @@ public class ImageRecognition : MonoBehaviour
             Quaternion worldRotation = imageTransform.rotation;
 
             GameObject obj = Instantiate(gameObjectToInstantiate, worldPosition, worldRotation);
+            spawnedObjects.Add(obj); // Ajoute l'objet à la liste des objets instanciés
             // obj.transform.SetParent(trackedImage.transform);
         }
 
@@ -84,3 +113,4 @@ public class ImageRecognition : MonoBehaviour
         // throwDice.SetActive(true); // Désactive le bouton de lancer le dé
     }
 }
+
