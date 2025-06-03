@@ -1,8 +1,8 @@
 using System.Collections.Generic;
-using System.Runtime.CompilerServices;
 using UnityEngine;
 using UnityEngine.XR.ARFoundation;
 using UnityEngine.XR.ARSubsystems;
+using System.Collections;
 
 public class ImageRecognition : MonoBehaviour
 {
@@ -15,6 +15,7 @@ public class ImageRecognition : MonoBehaviour
     public List<GameObject> spawnedObjects = new List<GameObject>();
     public GameObject victoryPanel;
     public GameObject shoot;
+    public float timeBackMainmenu = 5;
 
     void Start()
     {
@@ -31,10 +32,11 @@ public class ImageRecognition : MonoBehaviour
         spawnedObjects.RemoveAll(obj => obj == null);
 
         // Vérifier s'om n'en reste plus
-        if (spawnedObjects.Count ==0 && hasSpawned == true)
+        if (spawnedObjects.Count == 0 && hasSpawned == true)
         {
             victoryPanel.SetActive(true);
             shoot.SetActive(false);
+            StartCoroutine(BackMainMenu(timeBackMainmenu));
             Debug.Log("Tous les objets ont été détruits, prêt à ré-instancier.");
         }
     }
@@ -58,7 +60,7 @@ public class ImageRecognition : MonoBehaviour
         {
             Debug.Log($"Image added: {trackedImage.referenceImage.name}");
             // Handle the added image
-            
+
         }
 
         foreach (var trackedImage in args.updated)
@@ -111,6 +113,12 @@ public class ImageRecognition : MonoBehaviour
         Debug.Log($"{mobsToSpawn} objets instanciés sur l’image '{trackedImage.referenceImage.name}'.");
 
         // throwDice.SetActive(true); // Désactive le bouton de lancer le dé
+    }
+
+    IEnumerator BackMainMenu(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        UnityEngine.SceneManagement.SceneManager.LoadScene("MainMenu");
     }
 }
 

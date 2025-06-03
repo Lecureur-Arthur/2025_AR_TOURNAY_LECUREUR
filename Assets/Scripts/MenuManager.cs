@@ -10,6 +10,11 @@ public class MenuManager : MonoBehaviour
         SceneManager.LoadScene("SimulationDice");
     }
 
+    public void BackMainMenu()
+    {
+        SceneManager.LoadScene("MainMenu");
+    }
+
     public void QuitGame()
     {
         Application.Quit();
