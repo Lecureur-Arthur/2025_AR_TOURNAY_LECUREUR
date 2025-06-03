@@ -1,6 +1,6 @@
 # AugMonia – Jeu en Réalité Augmentée
 
-Bienvenue dans **AugMonia**, un jeu en réalité augmentée où vous devez affronter des araignées virtuelles à l'aide de votre téléphone Samsung !
+Bienvenue dans **AugMonia**, un jeu en réalité augmentée où vous devez affronter des araignées virtuelles à l'aide de votre téléphone Android compatible AR !
 
 ## Description
 
