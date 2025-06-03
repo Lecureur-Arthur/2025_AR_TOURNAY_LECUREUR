@@ -1,6 +1,6 @@
 # AugMonia – Jeu en Réalité Augmentée
 
-Bienvenue dans **AugMonia**, un jeu en réalité augmentée où vous devez affronter des araignées virtuelles à l'aide de votre téléphone Android compatible AR !
+Bienvenue dans **AugMonia**, un jeu en réalité augmentée où vous devez affronter des araignées virtuelles à l'aide de votre téléphone Android !
 
 ## Description
 
@@ -11,7 +11,7 @@ Dans ce jeu, vous incarnez un chasseur de monstres. Votre mission : **tuer toute
 3. Affronter le bon nombre d'araignées.
 4. Les vaincre en tapant sur votre écran pour lancer des boules explosives.
 
-Le jeu utilise **Unity** (version 3.37) et nécessite un téléphone **Samsung** de **10e à 15e génération**.
+Le jeu utilise **Unity** (version 3.37) et nécessite un téléphone **compatible AR**.
 
 ---
 
@@ -20,7 +20,7 @@ Le jeu utilise **Unity** (version 3.37) et nécessite un téléphone **Samsung**
 Avant de commencer, assurez-vous d’avoir :
 
 * L'appplication **Unity** avec la bonne version : 3.37
-* Un **téléphone Samsung** (de génération 10 à 15).
+* Un **téléphone**.
 * Un **ordinateur avec ADB** (Android Debug Bridge) installé pour vérifier la connexion.
 * Un câble USB pour connecter le téléphone à l’ordinateur.
 * Le fichier **`AugMonia`** situé dans le dossier **apk_build** (fourni sur le dépôt GitHub).
