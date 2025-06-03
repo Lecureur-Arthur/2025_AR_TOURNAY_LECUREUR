@@ -23,7 +23,7 @@ Avant de commencer, assurez-vous d’avoir :
 * Un **téléphone Samsung** (de génération 10 à 15).
 * Un **ordinateur avec ADB** (Android Debug Bridge) installé pour vérifier la connexion.
 * Un câble USB pour connecter le téléphone à l’ordinateur.
-* Le fichier **`augMonia`** situé dans le dossier **apk_build** (fourni sur le dépôt GitHub).
+* Le fichier **`AugMonia`** situé dans le dossier **apk_build** (fourni sur le dépôt GitHub).
 
 ---
 
@@ -42,7 +42,7 @@ Avant de commencer, assurez-vous d’avoir :
 3. Installez l’APK sur votre téléphone :
 
    ```bash
-   adb install augMonia.apk
+   adb install AugMonia.apk
    ```
 
 ---
@@ -84,5 +84,5 @@ Une fois le jeu lancé, suivez ces étapes :
 ## Développement
 
 * Le jeu a été développé avec **Unity 3.37**.
-* Le projet complet est disponible sur **GitHub** : \[Lien du dépôt ici].
+* Le projet complet est disponible sur **GitHub**.
 
